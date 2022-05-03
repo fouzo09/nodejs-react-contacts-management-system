@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios"
+import { Table } from '../components/Table';
 const Home = () => {
 
   const [contacts, setContacts] = useState([]);
@@ -14,10 +15,10 @@ const Home = () => {
         setContacts(response.data);
       }
   }
-  console.log(contacts);
+  
   return (
     <div className='content'>
-      <h1>HOME</h1>
+      <Table contacts={contacts} />
     </div>
   )
 }

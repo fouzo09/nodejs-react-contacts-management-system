@@ -1,0 +1,35 @@
+table{
+    width: 100%;
+    border-spacing: 0px;
+}
+
+thead tr{
+    height: 50px;
+    background-color: #339af0;
+    color: white;
+    border-collapse: collapse;
+}
+
+tbody tr{
+    height: 50px;
+}
+
+tbody tr:nth-child(even) { 
+    background-color: #e9ecef;  
+}
+
+tr 
+td,
+th{
+    text-align: start;
+}
+
+.icon{
+    height: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.icon-remove{
+    color: red;
+}
