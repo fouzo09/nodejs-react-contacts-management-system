@@ -3,6 +3,7 @@ import { getUsers, addUser, deleteUser, editUser} from  "../controllers/user.js"
 
 const ROUTER = express.Router();
 
+
 ROUTER.get('/', (req, res) => {
     const htmlContent = "<h1>Welcome to the contacts management API!</h1>"
     res.send(htmlContent);
