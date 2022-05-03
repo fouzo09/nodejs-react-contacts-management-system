@@ -1,0 +1,16 @@
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import userRouter from "./routes/user.js";
+
+const APP = express();
+const PORT = 5000;
+
+APP.use(bodyParser.json());
+APP.use(cors());
+APP.use(userRouter);
+APP.use("*", (req, resp) => resp.send("Cette route n'exist pas !!"));
+
+APP.listen(PORT, ()=>{
+    console.log(`Le serveur est demaré à l'adresse : http://127.0.0.1:${PORT}`);
+})
