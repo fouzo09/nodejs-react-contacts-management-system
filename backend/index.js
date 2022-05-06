@@ -6,6 +6,7 @@ import userRouter from "./routes/user.js";
 const APP = express();
 const PORT = 5000;
 
+
 APP.use(bodyParser.json());
 APP.use(cors());
 APP.use(userRouter);

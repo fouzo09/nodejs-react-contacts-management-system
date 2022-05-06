@@ -1,0 +1,26 @@
+label{
+    display: block;
+    margin: 20px 0 5px 0;
+}
+
+.form--control{
+    height: 40px;
+    width: 80%;
+    border: solid 1px silver;
+    border-radius: 5px;
+}
+
+
+.btn{
+    width: 80%;
+    height: 34px;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #fff;
+}
+
+.btn--save{
+    background-color: #339af0;
+    border: solid 1px #339af0;
+    color: #fff;
+}
