@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useLocation,  useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./style/AddEdit.css"
@@ -14,10 +14,18 @@ const initialState = {
 const AddEdit = () => {
 
   const [state, setState] = useState(initialState);
+  const navigate = useNavigate();
+  const {pathname} = useLocation();
+  
 
   const {fullName, email, telephone} = state;
 
-  const navigate = useNavigate();
+  useEffect(()=>{
+    if(pathname.split("/").length === 3){
+      const id = pathname.split("/")[2];
+      getContact(id);
+    }
+  }, []);
 
   const handleInput = (event)=>{
     const {name, value} = event.target;
@@ -25,8 +33,26 @@ const AddEdit = () => {
     setState({...state, [name]: value})
   }
 
+  const getContact = async (id)=>{
+    const response = await axios.get(`http://127.0.0.1:5000/api/v1/contact/one/${id}`);
+    if(response.status === 200){
+      console.log(response.data);
+      setState(response.data);
+    }
+  }
+
   const addContact = async (data)=>{
     const response = await axios.post("http://127.0.0.1:5000/api/v1/contact/add", data);
+    if(response.status === 200){
+
+      toast.success(response.data);
+    }else{
+      toast.error(response.data);
+    }
+  }
+
+  const updateContact = async (data)=>{
+    const response = await axios.post(`http://127.0.0.1:5000/api/v1/contact/edit`, data);
     if(response.status === 200){
 
       toast.success(response.data);
@@ -40,7 +66,12 @@ const AddEdit = () => {
     if(!fullName || !email || !telephone){
       toast.error("Tous les champs sont obligatoires");
     }else{
-      addContact(state);
+      if(state.id){
+        updateContact(state);
+      }else{
+        addContact(state);
+      }
+      
       setTimeout(()=> navigate("/"), 8000);
     }
     
