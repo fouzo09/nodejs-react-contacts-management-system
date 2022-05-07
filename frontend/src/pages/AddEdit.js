@@ -1,6 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import { useLocation,  useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./style/AddEdit.css"
+import { toast } from 'react-toastify';
 
 
 const initialState = {
@@ -15,6 +17,8 @@ const AddEdit = () => {
 
   const {fullName, email, telephone} = state;
 
+  const navigate = useNavigate();
+
   const handleInput = (event)=>{
     const {name, value} = event.target;
 
@@ -24,15 +28,22 @@ const AddEdit = () => {
   const addContact = async (data)=>{
     const response = await axios.post("http://127.0.0.1:5000/api/v1/contact/add", data);
     if(response.status === 200){
-      console.log("OKAY........");
+
+      toast.success(response.data);
     }else{
-      console.log("NO........");
+      toast.error(response.data);
     }
   }
 
   const handleSubmit = (event)=>{
     event.preventDefault();
-    addContact(state)
+    if(!fullName || !email || !telephone){
+      toast.error("Tous les champs sont obligatoires");
+    }else{
+      addContact(state);
+      setTimeout(()=> navigate("/"), 8000);
+    }
+    
   }
 
   return (
