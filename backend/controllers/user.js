@@ -15,7 +15,7 @@ export const addUser = (req, resp)=>{
 
 export const editUser = (req, resp)=>{
 
-    const id = req.params.id;
+    const id = req.body.id;
     const index = contacts.findIndex((item)=> item.id === id);
     if(index !== -1){
         contacts[index]["fullName"] = req.body.fullName;
@@ -27,6 +27,16 @@ export const editUser = (req, resp)=>{
     return resp.json("Oopps!!! Contact non trouvé.");
 }
 
+export const getUser = (req, resp)=>{
+
+    const id = req.params.id;
+    const index = contacts.findIndex((item)=> item.id === id);
+    if(index !== -1){
+        return resp.json(contacts[index]);
+    }
+    return resp.json({});
+}
+
 export const deleteUser = (req, resp)=>{
 
     const id = req.params.id;
@@ -34,7 +44,7 @@ export const deleteUser = (req, resp)=>{
     if(index !== -1){
         
         contacts.splice(index, 1);
-        return resp.json("Contact supprimé avec succes"+index);
+        return resp.json("Contact supprimé avec succes");
     }
     return resp.json("Oopps!!! Contact non trouvé.");
 }   

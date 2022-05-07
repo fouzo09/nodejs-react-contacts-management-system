@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUsers, addUser, deleteUser, editUser} from  "../controllers/user.js";
+import { getUsers, getUser, addUser, deleteUser, editUser} from  "../controllers/user.js";
 
 const ROUTER = express.Router();
 
@@ -11,9 +11,11 @@ ROUTER.get('/', (req, res) => {
 
 ROUTER.get('/api/v1/contact/list', getUsers);
 
+ROUTER.get('/api/v1/contact/one/:id', getUser);
+
 ROUTER.post('/api/v1/contact/add', addUser);
 
-ROUTER.post('/api/v1/contact/edit/:id', editUser);
+ROUTER.post('/api/v1/contact/edit', editUser);
 
 ROUTER.get('/api/v1/contact/remove/:id', deleteUser);
 
