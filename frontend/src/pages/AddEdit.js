@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useLocation,  useNavigate } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
 import "./style/AddEdit.css"
 import { toast } from 'react-toastify';
@@ -15,14 +15,14 @@ const AddEdit = () => {
 
   const [state, setState] = useState(initialState);
   const navigate = useNavigate();
-  const {pathname} = useLocation();
+  const {id} = useParams();
   
 
   const {fullName, email, telephone} = state;
 
   useEffect(()=>{
-    if(pathname.split("/").length === 3){
-      const id = pathname.split("/")[2];
+    if(id){
+      
       getContact(id);
     }
   }, []);
