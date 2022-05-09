@@ -2,11 +2,11 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import userRouter from "./routes/user.js";
-
+import helmet from "helmet"
 const APP = express();
 const PORT = 5000;
 
-
+APP.use(helmet());
 APP.use(bodyParser.json());
 APP.use(cors());
 APP.use(userRouter);
